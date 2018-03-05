@@ -87,7 +87,7 @@ describe('Basic', function() {
       }
     }
     registerListener(ele, 'click', handler)
-    expect(registerListener.uiEvtOpts).toEqual(false)
+    expect((registerListener as any)._uiEvtOpts).toEqual(false)
   })
 
   it('invalid', function() {

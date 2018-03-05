@@ -59,9 +59,15 @@ registerListener(ele, 'click', handler, {}, unRegisterListenersCollection)
 unRegisterListenersCollection.forEach(fn => fn())
 ```
 
-### registerListener.uiEvtOpts
+### registerListener._uiEvtOpts
 
 * `@return {boolean}` - Return true when the environment support "passive" `EventListenerOptions `
+
+```ts
+if((registerListener as any)._uiEvtOpts) {
+  // code here
+}
+```
 
 ## Development
 

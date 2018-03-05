@@ -1,5 +1,5 @@
 'use strict'
-import { EventListenerOptions, RegisterListener } from './interface'
+import { EventListenerOptions } from './interface'
 
 const win: Window = window
 
@@ -7,12 +7,12 @@ const win: Window = window
 const NOOP = () => {
   // empty
 }
-let uiEvtOpts = false
+let _uiEvtOpts: boolean = false
 
 try {
   let opts = Object.defineProperty({}, 'passive', {
     get: /* istanbul ignore next */ () => {
-      uiEvtOpts = true
+      _uiEvtOpts = true
     }
   })
   win.addEventListener('optsTest', NOOP, opts)
@@ -20,22 +20,24 @@ try {
   // empty
 }
 
-function registerListener(ele: any,
-                          eventName: string,
-                          callback: EventListener,
-                          opts: EventListenerOptions = {},
-                          unRegisterListenersCollection?: Function[]): Function {
+function registerListener(
+  ele: any,
+  eventName: string,
+  callback: EventListener,
+  opts: EventListenerOptions = {},
+  unRegisterListenersCollection?: Function[]
+): Function {
   if (!ele) throw new TypeError('Function requires "ele" parameter!')
   if (!eventName) throw new TypeError('Function requires "eventName" parameter!')
   if (!callback) throw new TypeError('Function requires "callback" parameter!')
 
   // use event listener options when supported
   // otherwise it's just a boolean for the "capture" arg
-  const listenerOpts: any = uiEvtOpts
+  const listenerOpts: any = _uiEvtOpts
     ? {
-      capture: !!opts.capture,
-      passive: !!opts.passive
-    }
+        capture: !!opts.capture,
+        passive: !!opts.passive
+      }
     : !!opts.capture
 
   let unReg: Function
@@ -59,6 +61,6 @@ function registerListener(ele: any,
   return unReg
 }
 
-(registerListener as RegisterListener).uiEvtOpts = uiEvtOpts;
+;(registerListener as any)._uiEvtOpts = _uiEvtOpts
 
 export default registerListener
