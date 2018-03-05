@@ -5,7 +5,7 @@ export interface EventListenerOptions {
 
 export interface RegisterListener {
   (
-    ele: HTMLElement,
+    ele: any,
     eventName: string,
     callback: EventListener,
     opts?: EventListenerOptions,
