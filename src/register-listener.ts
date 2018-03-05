@@ -20,13 +20,11 @@ try {
   // empty
 }
 
-const registerListener: RegisterListener = function r(
-  ele: HTMLElement,
-  eventName: string,
-  callback: EventListener,
-  opts: EventListenerOptions = {},
-  unRegisterListenersCollection?: Function[]
-): Function {
+function registerListener(ele: any,
+                          eventName: string,
+                          callback: EventListener,
+                          opts: EventListenerOptions = {},
+                          unRegisterListenersCollection?: Function[]): Function {
   if (!ele) throw new TypeError('Function requires "ele" parameter!')
   if (!eventName) throw new TypeError('Function requires "eventName" parameter!')
   if (!callback) throw new TypeError('Function requires "callback" parameter!')
@@ -35,9 +33,9 @@ const registerListener: RegisterListener = function r(
   // otherwise it's just a boolean for the "capture" arg
   const listenerOpts: any = uiEvtOpts
     ? {
-        capture: !!opts.capture,
-        passive: !!opts.passive
-      }
+      capture: !!opts.capture,
+      passive: !!opts.passive
+    }
     : !!opts.capture
 
   let unReg: Function
@@ -61,6 +59,6 @@ const registerListener: RegisterListener = function r(
   return unReg
 }
 
-registerListener.uiEvtOpts = uiEvtOpts
+(registerListener as RegisterListener).uiEvtOpts = uiEvtOpts;
 
 export default registerListener
