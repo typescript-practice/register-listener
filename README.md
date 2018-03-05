@@ -16,13 +16,15 @@ Built to use modern event listener options register a listener and return a meth
 ## Example
 
 ```js
+import registerListener from 'tp-register-listener';
+
 const handler = () => {
   // do something
-}
-const body = document.body
-const unReg = registerListener(body, 'click', handler)
+};
+const body = document.body;
+const unReg = registerListener(body, 'click', handler);
 // remove this listener
-unReg()
+unReg();
 ```
 
 ## Install
@@ -34,12 +36,12 @@ unReg()
 
 ### registerListener(ele, eventName, callback, opts, unRegisterListenersCollection)
 
-Returns a single config value, given a key. 
+Returns a unRegister function to remove the listener.
 
-* `@param {HTMLElement} ele ` - Elements of the binding event
-* `@param {string} eventName ` - The event name
-* `@param {EventListener} callback ` - The event listener
-* `@param {EventListenerOptions} [opts={}] ` - The event listener options
+* `@param {HTMLElement} ele ` - Elements to binding event;
+* `@param {string} eventName ` - The event name;
+* `@param {EventListener} callback ` - The event listener;
+* `@param {EventListenerOptions} [opts={}] ` - The event listener options;
 * `@param {Function[]} [unRegisterListenersCollection] ` - The collections of unRegister listeners.
 
 ```js
@@ -48,18 +50,18 @@ const unRegisterListenersCollection = []
 const handler = () => {
   // empty
 }
-const ele: HTMLElement = document.body
+const ele = document.body
 registerListener(ele, 'click', handler, {}, unRegisterListenersCollection)
 registerListener(ele, 'click', handler, {}, unRegisterListenersCollection)
 registerListener(ele, 'click', handler, {}, unRegisterListenersCollection)
 
-// un register all
+// remove all listeners.
 unRegisterListenersCollection.forEach(fn => fn())
 ```
 
 ### registerListener.uiEvtOpts
 
-* `@return {boolean}` - Return true when the envirmonent support "passive" `EventListenerOptions `
+* `@return {boolean}` - Return true when the environment support "passive" `EventListenerOptions `
 
 ## Development
 
