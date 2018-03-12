@@ -1,8 +1,6 @@
 'use strict'
 import { EventListenerOptions } from './interface'
 
-const win: Window = window
-
 /* istanbul ignore next */
 const NOOP = () => {
   // empty
@@ -15,7 +13,7 @@ try {
       _uiEvtOpts = true
     }
   })
-  win.addEventListener('optsTest', NOOP, opts)
+  window.addEventListener('optsTest', NOOP, opts)
 } catch (e) {
   // empty
 }
